@@ -7,11 +7,19 @@ import defaultOptions, { RequiredOptions } from './QROptions.js';
 import gradientTypes from '../constants/gradientTypes.js';
 import { QRCode, Gradient, FilterFunction, Options } from '../types';
 import getMode from '../tools/getMode.js';
-import { Canvas, CanvasRenderingContext2D, ExportFormat, RenderOptions, loadImage, Image } from 'skia-canvas';
+import { Canvas, CanvasRenderingContext2D, ExportFormat, loadImage, Image } from 'skia-canvas';
 import qrcode from 'qrcode-generator';
 import { promises as fs } from 'fs';
 import mergeDeep from '../tools/merge.js';
 import sanitizeOptions from '../tools/sanitizeOptions.js';
+
+// Type definitions for skia-canvas v3 compatibility
+type RenderOptions = {
+  page?: number;
+  density?: number;
+  quality?: number;
+  matte?: string;
+};
 
 const squareMask = [
   [1, 1, 1, 1, 1, 1, 1],
@@ -420,7 +428,7 @@ export default class QRCanvas {
     x: number;
     y: number;
     size: number;
-  }): CanvasGradient {
+  }): any {
     let gradient;
 
     if (options.type === gradientTypes.radial) {
@@ -472,7 +480,7 @@ export default class QRCanvas {
    */
   async toBuffer(format: ExportFormat = 'png', options?: RenderOptions): Promise<Buffer> {
     await this.created;
-    return this._canvas.toBuffer(format, options);
+    return (this._canvas as any).toBuffer(format, options);
   }
 
   /**
@@ -483,7 +491,7 @@ export default class QRCanvas {
    */
   async toDataUrl(format: ExportFormat = 'png', options?: RenderOptions): Promise<string> {
     await this.created;
-    return this._canvas.toDataURL(format, options);
+    return this._canvas.toDataURL(format, options as any);
   }
 
   /**
@@ -496,6 +504,7 @@ export default class QRCanvas {
    */
   async toFile(filePath: string, format: ExportFormat = 'png', options?: RenderOptions): Promise<void> {
     await this.created;
-    return fs.writeFile(filePath, await this._canvas.toBuffer(format, options));
+    const buffer = await (this._canvas as any).toBuffer(format, options);
+    return fs.writeFile(filePath, buffer as any);
   }
 }
