@@ -2,7 +2,7 @@
 .idea
 
 # built files
-/dist
+# /dist - included for GitHub npm installs
 
 # npm modules
 /node_modules
