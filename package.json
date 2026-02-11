@@ -1,5 +1,5 @@
 {
-  "name": "@loskir/styled-qr-code-node",
+  "name": "@sfevo/styled-qr-code-node",
   "version": "1.5.2",
   "description": "Add a style and an image to your QR code",
   "files": [
@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/loskir/styled-qr-code.git"
+    "url": "git+https://github.com/sfevo/styled-qr-code.git"
   },
   "keywords": [
     "qr",
