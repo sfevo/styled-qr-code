@@ -94,8 +94,8 @@ var QRDot = class {
     drawFunction.call(this, { x, y, size, context, getNeighbor });
   }
   _rotateFigure({ x, y, size, context, rotation = 0, draw }) {
-    const cx = x + size / 2;
-    const cy = y + size / 2;
+    const cx = Math.round(x + size / 2);
+    const cy = Math.round(y + size / 2);
     context.translate(cx, cy);
     rotation && context.rotate(rotation);
     draw();
@@ -341,8 +341,8 @@ var QRCornerSquare = class {
     drawFunction.call(this, { x, y, size, context, rotation });
   }
   _rotateFigure({ x, y, size, context, rotation = 0, draw }) {
-    const cx = x + size / 2;
-    const cy = y + size / 2;
+    const cx = Math.round(x + size / 2);
+    const cy = Math.round(y + size / 2);
     context.translate(cx, cy);
     rotation && context.rotate(rotation);
     draw();
@@ -435,8 +435,8 @@ var QRCornerDot = class {
     drawFunction.call(this, { x, y, size, context, rotation });
   }
   _rotateFigure({ x, y, size, context, rotation = 0, draw }) {
-    const cx = x + size / 2;
-    const cy = y + size / 2;
+    const cx = Math.round(x + size / 2);
+    const cy = Math.round(y + size / 2);
     context.translate(cx, cy);
     rotation && context.rotate(rotation);
     draw();
