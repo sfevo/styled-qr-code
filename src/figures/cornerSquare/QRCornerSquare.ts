@@ -33,8 +33,9 @@ export default class QRCornerSquare {
   }
 
   _rotateFigure({ x, y, size, context, rotation = 0, draw }: RotateFigureArgsCanvas): void {
-    const cx = x + size / 2;
-    const cy = y + size / 2;
+    // Round center coordinates to avoid subpixel artifacts in SVG rendering
+    const cx = Math.round(x + size / 2);
+    const cy = Math.round(y + size / 2);
 
     context.translate(cx, cy);
     rotation && context.rotate(rotation);
